@@ -1,7 +1,7 @@
 # Brainfuck
 text2brain_alfa.c
 =================
-
+Converts a string to a brainfuck code that prints that string.  
 
 Program prevadejici zadany textovy retezec na program v Brainfucku co vypisuje zadany retezec. :)
 
