@@ -248,10 +248,7 @@ char * Varianta_A(char * veta, char * vysledek,  int nasobek, int posun ) {
 		vysledek = pridej_znak('[', vysledek );
 		vysledek = opakuj( substituce, vysledek );
 		vysledek = pridej_retezec("<]>", vysledek );
-		if ( substituce >= 0 )
-			vysledek = opakuj( -substituce -1, vysledek );
-		else
-			vysledek = opakuj( -substituce +1, vysledek );
+		vysledek = opakuj( -substituce -1, vysledek );
 		vysledek = pridej_znak(']', vysledek );
 	} else {			// <[>+++<<]>-]
 		vysledek = pridej_retezec("<[>", vysledek );
