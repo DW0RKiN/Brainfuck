@@ -1,6 +1,6 @@
 /************************************************************************
  *                                                                      *
- *  String to Brainfuck, variant Gamma                                   *
+ *  String to Brainfuck, variant Gamma                                  *
  *  Converts a string to a brainfuck code that prints that string.      *
  *                                                                      *
  *  ++[<±...<A1<A0[>]<-------]B[<±...<C1<C0[>]<-]<D0<D1<±...<[.>]       *
@@ -8,7 +8,7 @@
  *  string[0] = FceA(A0) + B*C0 + D0                                    *
  *  string[0] = FceA(A1) + B*C1 + D1                                    *
  *                                                                      *
- *  FceA[-3..3] = 182, 36, 146, 0, 1, 110, 220, 74                      *
+ *  FceA[-3..3] = 182, 36, 146, 0, 110, 220, 74                         *
  *                                                                      *
  ************************************************************************/
 
