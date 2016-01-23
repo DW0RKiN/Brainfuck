@@ -53,22 +53,23 @@ Tisk se provede pres [>.]
 
 Nevyhoda je, ze algoritmus pro kazdy znak zabere jednu pametovou bunku.
 
-        ++[<±...<A1<A0[>]<-------]B[<±...<C1<C0[>]<-]<D0<D1<±...<[.>]
+    ++[<±...<A1<A0[>]<-------]B[<±...<C1<C0[>]<-]<D0<D1<±...<[.>]
         
-        string[0] = FceA(A0) + B*C0 + D0
-        string[0] = FceA(A1) + B*C1 + D1
+    string[0] = FceA(A0) + B*C0 + D0
+    string[0] = FceA(A1) + B*C1 + D1
         
-        FceA[-3..3] = 182, 36, 146, 0, 110, 220, 74
+    FceA[-3..3] = 182, 36, 146, 0, 110, 220, 74
         
 Vystup vypada nejak takto:
 
-        dworkin@dworkin-Aspire-E1-572G:~/Programovani/Cecko/Brainfuck/Gama$ ./a.out Ukonceni v linuxu ctrl+d, pokud se nema prevadet ENTER tak prvne stisknete ESC.
-        Napis neco...
-        Hello World!
-        nasobek: 4 delka 116
-        ++[<--<+<+<+<+<+++<--<+<+<+<+<+++[>]<-------]>++++[<++<-<--<<+<<+++<-<<<<--<[>]<-]<++<+<--<--<<+<+<<+<--<--<-<--[.>]
-        Napis neco...
-        Hello World!^[
-        nasobek: 4 delka 109
-        ++[<--<+<+<+<+<+++<--<+<+<+<+<+++[>]<-------]++++[<-<--<<+<<+++<-<<<<--<[>]<-]<+<--<--<<+<+<<+<--<--<-<--[.>]
-        Napis neco...
+    dworkin@dworkin-Aspire-E1-572G:~/Programovani/Cecko/Brainfuck/Gama$ ./a.out
+    Ukonceni v linuxu ctrl+d, pokud se nema prevadet ENTER tak prvne stisknete ESC.
+    Napis neco...
+    Hello World!
+    nasobek: 4 delka 116
+    ++[<--<+<+<+<+<+++<--<+<+<+<+<+++[>]<-------]>++++[<++<-<--<<+<<+++<-<<<<--<[>]<-]<++<+<--<--<<+<+<<+<--<--<-<--[.>]
+    Napis neco...
+    Hello World!^[
+    nasobek: 4 delka 109
+    ++[<--<+<+<+<+<+++<--<+<+<+<+<+++[>]<-------]++++[<-<--<<+<<+++<-<<<<--<[>]<-]<+<--<--<<+<+<<+<--<--<-<--[.>]
+    Napis neco...
