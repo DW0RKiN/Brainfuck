@@ -1,16 +1,18 @@
-/************************************************************************
- *                                                                      *
- *  String to Brainfuck, variant Gamma                                  *
- *  Converts a string to a brainfuck code that prints that string.      *
- *                                                                      *
- *  ++[<±...<A1<A0[>]<-------]B[<±...<C1<C0[>]<-]<D0<D1<±...<[.>]       *
- *                                                                      *
- *  string[0] = FceA(A0) + B*C0 + D0                                    *
- *  string[0] = FceA(A1) + B*C1 + D1                                    *
- *                                                                      *
- *  FceA[-3..3] = 182, 36, 146, 0, 110, 220, 74                         *
- *                                                                      *
- ************************************************************************/
+/**************************************************************************
+ *                                                                        *
+ *  String to Brainfuck, variant Gamma                                    *
+ *  Converts a string to a brainfuck code that prints that string.        *
+ *                                                                        *
+ *  ++[<±...<A1<A0[>]<-------]B[<±...<C1<C0[>]<-]<D0<D1<±...<[.>]         *
+ *  ++[<-P<±...<A1<A0[>+P]<-------]B[<±...<C1<C0[>]<-]<D0<D1<±...<[.>]    *
+ *                                                                        *
+ *                                                                        *
+ *  string[0] = FceA(A0+P) + B*C0 + D0                                    *
+ *  string[0] = FceA(A1+P) + B*C1 + D1                                    *
+ *                                                                        *
+ *  FceA[-3..3] = 182, 36, 146, 0, 110, 220, 74                           *
+ *                                                                        *
+ ***************************************************************************/
 
 
 #include <stdio.h>
@@ -87,6 +89,11 @@ char * Varianta_C(char * veta, char * vysledek,  int nasobek ) {
 // ++[-------<-->]	36	... + 28 = 74
 // ++[-------<>]	0	... + 36 = 36
 	
+	
+// +[-------<---<--<-<+<++<+++>>>>>>] +3:037 +2:110 +1:183 -1:073 -2:146 -3:219
+// -[-------<---<--<-<+<++<+++>>>>>>] +3:219 +2:146 +1:073 -1:183 -2:110 -3:037
+// ++[------<---<--<-<+<++<+++>>>>>>] +3:129 +2:086 +1:043 -1:213 -2:170 -3:127
+	
 	int vysledky[7]	= { 0, 36, 74, 110, 146, 182, 220 };
 	int posuny[7]	= { 0, -2,  3,   1,  -1,  -3,   2 };
 	
@@ -133,10 +140,41 @@ char * Varianta_C(char * veta, char * vysledek,  int nasobek ) {
 		}
 	}
 	
+	
+	int best_p;
+	int best_d = -1;
+	
+	for ( j = -3; j <= 3; j++ ) {
+	
+		k = 0;
+		if ( j ) {
+			k += 2 + 2*abs( j ); // ++[<-j...[>j]<-------]>
+			if ( ignorovano ) k--;
+		}
+
+		i = delka - ignorovano;
+		while ( i-- > 1 ) k += abs( optimalni_pocatky[i] - j);
+
+		if ( k < best_d  || best_d < 0 ) {
+			best_p = j;
+			best_d = k;
+		}
+	}
+	
+	
+	if ( best_p ) {
+		i = delka - ignorovano;
+		while ( i-- > 1 ) optimalni_pocatky[i] -= best_p;
+	}
+	
 //	==============================
 //	Vypis pocatku
 //	++[
 	vysledek = pridej_retezec("++[", vysledek );
+	if ( best_p ) {
+		vysledek = pridej_znak('<', vysledek );
+		vysledek = opakuj( -best_p , vysledek );
+	}
 
 
 //	==============================
@@ -152,14 +190,22 @@ char * Varianta_C(char * veta, char * vysledek,  int nasobek ) {
 //	==============================
 //	Vypis konce prvni smycky
 //	[>]<-------]
-	vysledek = pridej_retezec("[>]<-------]", vysledek );
-	
+	if ( best_p ) {
+		vysledek = pridej_retezec("[>", vysledek );
+		vysledek = opakuj( best_p, vysledek );
+		vysledek = pridej_retezec("]>-------]", vysledek );
+	} else 
+		vysledek = pridej_retezec("[>]<-------]", vysledek );
 
 //	======================
 //	Prodluzeni druhe smycky o predtim ignorovane (zkracuje '\n' na konci)
 //	>
 	i = ignorovano;
-	while ( i-- ) vysledek = pridej_znak('>', vysledek );
+	if ( best_p ) i--;
+	if ( i < 0 ) 
+		vysledek = pridej_znak('<', vysledek );
+	else 
+		while ( i-- ) vysledek = pridej_znak('>', vysledek );
 
 	
 //	======================
