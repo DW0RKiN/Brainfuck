@@ -60,7 +60,7 @@ Nevyhoda je, ze algoritmus pro kazdy znak zabere jednu pametovou bunku.
     ++[<-P<±...<A1<A0[>P]<-------]<B[<±...<C1<C0[>]<-]<D0<D1<±...<[.>]
         
     string[0] = FceA(A0) + B*C0 + D0
-    string[0] = FceA(A1+P) + B*C1 + D1
+    string[1] = FceA(A1+P) + B*C1 + D1
         
     FceA[-3..3] = 182, 36, 146, 0, 110, 220, 74
         
