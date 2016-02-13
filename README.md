@@ -63,6 +63,7 @@ Nevyhoda je, ze algoritmus pro kazdy znak zabere jednu pametovou bunku.
     string[1] = FceA(A1+P) + B*C1 + D1
         
     FceA[-3..3] = 182, 36, 146, 0, 110, 220, 74
+    FceA[0] = Forbidden
         
 Vystup vypada nejak takto:
 
